@@ -1,0 +1,22 @@
+{
+  "name": "elm_node_app",
+  "version": "0.1.0",
+  "description": "Elm language running inside Node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwthomp/elm_playground.git"
+  },
+  "author": "Jeff Thompson <mythrndr@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jwthomp/elm_playground/issues"
+  },
+  "homepage": "https://github.com/jwthomp/elm_playground#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
