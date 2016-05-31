@@ -22,11 +22,16 @@ main =
 
 type alias Model =
   { 
+    word : String
   }
 
 init : (Model, Cmd Msg)
 init =
-  (Model , Cmd.batch([ping "ping test", dbg "started"]))
+  ( Model ""
+  , Cmd.batch 
+    [ ping "ping test"
+    , dbg "started" 
+    ])
 
 
 -- UPDATE
@@ -42,9 +47,9 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update action model =
   case action of
     Pong msg ->
-      ( model, dbg msg)
+      ( Model msg, dbg msg)
     Tick newTime ->
-      (model, dbg <| "Time: " ++ toString newTime)
+      (Model <| toString newTime , dbg <| "Time: " ++ toString newTime)
 
 
 -- SUBSCRIPTIONS
@@ -53,10 +58,10 @@ port pong : (String -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.batch([
-    pong Pong,
-    Time.every second Tick
-  ])
+  Sub.batch
+    [ pong Pong
+    , Time.every second Tick
+    ]
 
 
 -- VIEW
