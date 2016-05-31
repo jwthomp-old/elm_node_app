@@ -27,11 +27,7 @@ type alias Model =
 
 init : (Model, Cmd Msg)
 init =
-  ( Model ""
-  , Cmd.batch 
-    [ ping "ping test"
-    , dbg "started" 
-    ])
+  ( Model "", dbg "started" )
 
 
 -- UPDATE
@@ -47,9 +43,9 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update action model =
   case action of
     Pong msg ->
-      ( Model msg, dbg msg)
+      ( Model msg, dbg <| "Pong: " ++ msg)
     Tick newTime ->
-      (Model <| toString newTime , dbg <| "Time: " ++ toString newTime)
+      (model, ping <| toString newTime)
 
 
 -- SUBSCRIPTIONS
