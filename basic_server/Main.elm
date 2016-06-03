@@ -25,24 +25,30 @@ init =
 
 -- UPDATE
 type Msg
-  = Open Server.Server
-  | Started Bool
+  = Started Bool
   | None
+  | Fail
+  | Succ
+  | Connected Server.Socket
 
 port dbg : String -> Cmd msg
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update action model =
   case action of
-    Open server ->
-      (model, dbg <| toString server)
     Started val ->
       (model, Cmd.batch 
         [ dbg "started"
-        , Task.perform (always None) (always None) (Server.listen 8001)
+        , Task.perform (always Fail) Connected (Server.listen 8001)
         ])
+    Fail ->
+      ( model, dbg "Fail")
+    Succ ->
+      (model, dbg "Succ")
     None ->
       (model, Cmd.none)
+    Connected socket ->
+      (model, dbg <| toString socket)
     
 
 -- SUBSCRIPTIONS
