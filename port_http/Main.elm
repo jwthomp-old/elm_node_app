@@ -34,13 +34,13 @@ init =
 -- UPDATE
 type Msg
   = None
-  | Recv String
+  | Recv (String, Server.Response)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update action model =
   case action of
     None -> (model, dbg "None")
-    Recv msg -> (model, dbg ("Recv" ++ msg ))
+    Recv (msg, resp) -> (model, dbg ("Recv" ++ msg ))
 
 
 -- SUBSCRIPTIONS

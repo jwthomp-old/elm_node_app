@@ -21,12 +21,11 @@ app.ports.binder.subscribe(function(data) {
 		let binding = data.bindings[i];
 		if (binding.method === 'GET') {
 			expressApp.get(binding.route, function(req, res) {
-				app.ports.recv.send(req.url);
+				app.ports.recv.send([req.url, res]);
 			});
 		}
 	}
 	expressApp.listen(data.prt, console.log('Listning on port: ', data.prt));
 
-	app.ports.recv.send('hi');
+	app.ports.recv.send(['hi', { a: 1 }]);
 });
-

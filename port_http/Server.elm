@@ -1,4 +1,6 @@
-port module Server exposing (listen, bind)
+port module Server exposing (listen, bind, Response)
+
+import Json.Encode
 
 type alias Binding =
   { method : String
@@ -10,8 +12,10 @@ type alias BindingData =
   , bindings : List Binding
   }
 
+type alias Response = Json.Encode.Value
 
-port recv : (String -> msg) -> Sub msg
+
+port recv : ((String, Response) -> msg) -> Sub msg
 
 port binder : BindingData -> Cmd msg
 
@@ -19,6 +23,6 @@ bind : BindingData -> Cmd msg
 bind bindings =
   binder bindings
 
-listen : (String -> msg) -> Sub msg
+listen : ((String, Response) -> msg) -> Sub msg
 listen tagger =
   recv tagger
