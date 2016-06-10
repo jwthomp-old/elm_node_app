@@ -40,7 +40,7 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update action model =
   case action of
     None -> (model, dbg "None")
-    Recv (msg, resp) -> (model, dbg ("Recv" ++ msg ))
+    Recv (msg, resp) -> (model, Cmd.batch[ Server.respond "foo" resp, dbg ("Recv" ++ msg )])
 
 
 -- SUBSCRIPTIONS

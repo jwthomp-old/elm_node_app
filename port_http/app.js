@@ -27,5 +27,9 @@ app.ports.binder.subscribe(function(data) {
 	}
 	expressApp.listen(data.prt, console.log('Listning on port: ', data.prt));
 
-	app.ports.recv.send(['hi', { a: 1 }]);
+});
+
+app.ports.responder.subscribe(function(data) {
+	let resp = data[1];
+	resp.send(data[0]);
 });
