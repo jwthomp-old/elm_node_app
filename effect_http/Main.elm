@@ -3,7 +3,6 @@ port module Main exposing (..)
 import Html exposing (..)
 import Html.App as Html
 import Server
-import Task
 
 main : Program Never
 main =
