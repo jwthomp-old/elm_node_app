@@ -1,10 +1,11 @@
-port module Server exposing (listen, bind, respond, Response)
+port module Server exposing (listen, bind, respond, Response, Binding)
 
 import Json.Encode
 
 type alias Binding =
   { method : String
   , route  : String
+  , handler : Int
   }
 
 type alias BindingData =
